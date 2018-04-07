@@ -32,6 +32,7 @@ class RoomList extends Component {
           })}
         </ul>
       </div>
+
     );
   }
 }
