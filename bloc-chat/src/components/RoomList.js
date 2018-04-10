@@ -29,8 +29,7 @@ class RoomList extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.newRoomName) {return}
-    const newRoomList = {name: this.state.newRoomName};
-    this.setState({ rooms: [...this.state.rooms, newRoomList] });
+
   }
 
   createRoom() {
@@ -55,8 +54,8 @@ class RoomList extends Component {
         </div>
 
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <input type='text' value={this.state.newRoom} onChange={(e) => this.handleChange(e)} />
-          <input type= 'submit' onClick={ this.createRoom() } />
+          <input type='text' value={this.state.newRoomName} onChange={(e) => this.handleChange(e)} />
+          <input type= 'submit' onClick= {() => this.createRoom()} />
         </form>
 
       </section>
