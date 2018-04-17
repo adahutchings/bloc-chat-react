@@ -9,7 +9,7 @@ class MessageList extends Component {
 
     this.state = {
       messages: [],
-        username:"" ,
+        user:"" ,
         content: "",
         sentAt: "",
         roomId: "",
@@ -37,7 +37,7 @@ class MessageList extends Component {
 
     .filter(message => message.roomId === currentRoom)
     .map(message => {
-      return <div className='thisMessage' key={message.key}>{message.content + " Sent At:" + message.sentAt}</div>
+      return <div className='thisMessage' key={message.key}>{message.user + ":" + message.content + " Sent At:" + message.sentAt}</div>
     })
 
     return (

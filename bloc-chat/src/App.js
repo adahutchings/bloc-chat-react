@@ -21,7 +21,10 @@ class App extends Component {
 constructor(props){
   super(props)
 
-  this.state = { currentRoom: ''};
+  this.state = {
+    currentRoom: '',
+    user: null
+  };
 }
 
 setCurrentRoom(room ) {
@@ -29,14 +32,23 @@ setCurrentRoom(room ) {
   console.log(room )
 }
 
+setUser(user){
+  this.setState({user: user})
+  console.log(user);
+}
+
   render() {
 
     const showMessages = this.state.currentRoom;
+    const userName = this.state.user === null ? "Guest" : this.state.user.displayName;
 
     return (
       <div className='App'>
         <header>
           <h1>Chat!</h1>
+          <h3>
+            <UserInfo firebase = {firebase} setUser={this.setUser.bind(this)} userName={userName} />
+          </h3>
         </header>
 
         <aside>
