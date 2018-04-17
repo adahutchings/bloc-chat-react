@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 
 
@@ -11,11 +12,10 @@ class MessageList extends Component {
         username:"" ,
         content: "",
         sentAt: "",
-        name: "",
+        roomId: "",
       };
 
     this.messagesRef = this.props.firebase.database().ref('messages');
-    this.state.messages.sentAt = this.props.firebase.database.ServerValue.TIMESTAMP;
   }
 
   componentDidMount() {
@@ -27,19 +27,25 @@ class MessageList extends Component {
   }
 
 
+
+
+
+
   render() {
     const currentRoom = this.props.currentRoom;
     const messageList = this.state.messages
 
-    .filter(message => message.name === currentRoom)
+    .filter(message => message.roomId === currentRoom)
     .map(message => {
-      return <div className='thisMessage' key={message.key}>{message.content}</div>
+      return <div className='thisMessage' key={message.key}>{message.content + " Sent At:" + message.sentAt}</div>
     })
 
     return (
       <div className='chatMessages'>
         <div>{messageList}</div>
+
       </div>
+
     );
   }
 

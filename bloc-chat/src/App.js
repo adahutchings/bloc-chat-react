@@ -19,12 +19,13 @@ firebase.initializeApp(config);
 class App extends Component {
 constructor(props){
   super(props)
+
   this.state = { currentRoom: ''};
 }
 
-setCurrentRoom(room) {
+setCurrentRoom(room ) {
   this.setState({currentRoom: room})
-  console.log(room)
+  console.log(room )
 }
 
   render() {
@@ -44,10 +45,9 @@ setCurrentRoom(room) {
         <main>
           <h1>{this.state.currentRoom.name}</h1>
           <div id="messagePlane">
-            {showMessages ? <MessageList firebase={firebase} currentRoom={this.state.currentRoom.key}/> : (null) }
+            {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key}/>) : (null) }
           </div>
         </main>
-
       </div>
     );
   }
