@@ -2,17 +2,16 @@
 import React, { Component } from 'react';
 
 
-
 class MessageList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       messages: [],
-        user:"" ,
-        content: "",
-        sentAt: "",
-        roomId: "",
+      user:"" ,
+      content: "",
+      sentAt: "",
+      roomId: "",
       };
 
     this.messagesRef = this.props.firebase.database().ref('messages');
@@ -26,6 +25,24 @@ class MessageList extends Component {
     });
   }
 
+  handleChange(e) {
+    this.setState({
+      user: this.state.user,
+      content: e.target.value,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+      roomId: this.props.currentRoom
+    });
+  }
+
+  createMessage(e) {
+    e.preventDefault();
+    this.messagesRef.push({
+      user: this.state.user,
+      content: this.state.content,
+      sentAt: this.state.sentAt,
+      roomId: this.props.currentRoom
+    });
+  }
 
 
 
@@ -35,6 +52,7 @@ class MessageList extends Component {
     const currentRoom = this.props.currentRoom;
     const messageList = this.state.messages
 
+
     .filter(message => message.roomId === currentRoom)
     .map(message => {
       return <div className='thisMessage' key={message.key}>{message.user + ":" + message.content + " Sent At:" + message.sentAt}</div>
@@ -43,7 +61,10 @@ class MessageList extends Component {
     return (
       <div className='chatMessages'>
         <div>{messageList}</div>
-
+        <form id="newMessage" >
+          <input type='text' value={this.state.content} onChange={(e) => this.handleChange(e)} />
+          <input type='submit' onClick={(e) => this.createMessage(e)} />
+        </form>
       </div>
 
     );

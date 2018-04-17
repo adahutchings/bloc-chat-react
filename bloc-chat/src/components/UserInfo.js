@@ -11,18 +11,13 @@ class UserInfo extends Component {
     }
 
 
-  componentDidMount(){
-    this.props.firebase.auth().onAuthStateChanged(user => {
-      this.props.setUser(user);
-    })
-  }
-
   userSignIn(){
     const provider = new this.props.firebase.auth.GoogleAuthProvider();
     this.props.firebase.auth().signInWithPopup( provider ).then((result) => {
       console.log("sign in succesful");
       const user = result.user;
       this.props.setUser(user);
+      console.log(user);
     });
   }
 
@@ -31,6 +26,12 @@ class UserInfo extends Component {
       console.log("sign out successful");
       this.props.setUser(null);
     });
+  }
+
+  componentDidMount(){
+    this.props.firebase.auth().onAuthStateChanged(user => {
+      this.props.setUser(user);
+    })
   }
 
   render () {
