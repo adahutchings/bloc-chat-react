@@ -26,10 +26,7 @@ class MessageList extends Component {
 
   handleChange(e) {
     this.setState({
-      user: this.props.user,
       content: e.target.value,
-      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      roomId: this.props.currentRoom
     });
   }
 
@@ -38,12 +35,11 @@ class MessageList extends Component {
     this.messagesRef.push({
       user: this.props.user,
       content: this.state.content,
-      sentAt: this.state.sentAt,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.currentRoom
     });
+    console.log(user);
   }
-
-
 
 
 
@@ -52,10 +48,12 @@ class MessageList extends Component {
     const messageList = this.state.messages
 
 
+
     .filter(message => message.roomId === currentRoom)
     .map(message => {
       return <div className='thisMessage' key={message.key}>{message.user + ":" + message.content + " Sent At:" + message.sentAt}</div>
     })
+
 
     return (
       <div className='chatMessages'>

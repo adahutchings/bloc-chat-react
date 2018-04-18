@@ -17,7 +17,6 @@ class UserInfo extends Component {
       console.log("sign in succesful");
       const user = result.user;
       this.props.setUser(user);
-      console.log(user);
     });
   }
 
