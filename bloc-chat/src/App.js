@@ -57,7 +57,7 @@ setUser(user){
         <main>
 
           <div id="messagePlane">
-            {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} />) : (null) }
+            {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} user={this.state.user} />) : (null) }
           </div>
         </main>
       </div>
