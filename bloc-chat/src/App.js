@@ -29,25 +29,24 @@ constructor(props){
 
 setCurrentRoom(room ) {
   this.setState({currentRoom: room})
-  console.log(room )
 }
 
 setUser(user){
-  this.setState({user: user})
-  console.log(user);
+  if (user === null ) {
+    return this.setState({ user: "Guest"})
+  } else return this.setState({user: user.displayName})
 }
 
   render() {
 
     const showMessages = this.state.currentRoom;
-    const userName = this.state.user === null ? "Guest" : this.state.user.displayName;
 
     return (
       <div className='App'>
         <header>
-          <h1>Chat!</h1>
+          <h1>Chat:  {this.state.currentRoom.name}</h1>
           <h3>
-            <UserInfo firebase = {firebase} setUser={this.setUser.bind(this)} userName={userName} />
+            <UserInfo firebase = {firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
           </h3>
         </header>
 
@@ -56,9 +55,9 @@ setUser(user){
         </aside>
 
         <main>
-          <h1>{this.state.currentRoom.name}</h1>
+
           <div id="messagePlane">
-            {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} user={this.state.user}/>) : (null) }
+            {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} />) : (null) }
           </div>
         </main>
       </div>

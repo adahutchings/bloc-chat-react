@@ -14,3 +14,12 @@ main {
   float: left;
   padding-left: 50px;
 }
+
+header {
+  border: 5px solid black;
+}
+
+#roomName {
+text-align: center;
+
+}

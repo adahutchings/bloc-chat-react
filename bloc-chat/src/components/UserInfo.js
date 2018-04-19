@@ -14,9 +14,7 @@ class UserInfo extends Component {
   userSignIn(){
     const provider = new this.props.firebase.auth.GoogleAuthProvider();
     this.props.firebase.auth().signInWithPopup( provider ).then((result) => {
-      console.log("sign in succesful");
-      const user = result.user;
-      this.props.setUser(user);
+      console.log(this.props.user);
     });
   }
 
@@ -37,13 +35,14 @@ class UserInfo extends Component {
     return (
 
       <section>
-        <div id="user-name">{this.props.userName}</div>
+        <div id="user-name">{this.props.user}</div>
 
-        {this.props.userName === 'Guest' ?
+        {this.props.user === 'Guest' ?
             <button id="sign-in" onClick={() => this.userSignIn()}>Sign In</button>
           :
             <button id="sign-out" onClick={() => this.userSignOut()}>Sign Out</button>
           }
+          {console.log(this.props.user)}
       </section>
 
     );
